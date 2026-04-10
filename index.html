@@ -3,243 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DGD BUY SELL - ARAFAT Edition</title>
+    <title>DGD BUY SELL - RGB Notice</title>
     <style>
         * { box-sizing: border-box; }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #000;
+            background-color: #000;
             color: white;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            text-align: center;
             overflow: hidden;
         }
 
-        .app-container {
-            background: rgba(15, 15, 15, 0.98);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 15px;
+        /* প্রিমিয়াম ঝিকিমিকি বর্ডার কার্ড */
+        .notice-container {
             width: 100%;
             max-width: 360px;
-            max-height: 98vh;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 1);
+            padding: 35px 25px;
+            background: #0d0d0d;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 1);
         }
 
-        .welcome-msg {
-            background: linear-gradient(90deg, #ff00cc, #3333ff, #00d2ff, #ff00cc);
+        /* রঙিন সাপের মতো ঘুরন্ত বর্ডার */
+        .notice-container::before {
+            content: '';
+            position: absolute;
+            height: 400%; width: 400%;
+            background: conic-gradient(
+                #ff0000, #ff00cc, #3333ff, #00ff88, #ffcc00, #ff0000
+            );
+            animation: rotateGlow 3s linear infinite;
+            left: -150%; top: -150%;
+            z-index: 1;
+        }
+
+        .notice-container::after {
+            content: '';
+            position: absolute;
+            background: #0d0d0d;
+            inset: 4px;
+            border-radius: 22px;
+            z-index: 2;
+        }
+
+        @keyframes rotateGlow {
+            100% { transform: rotate(360deg); }
+        }
+
+        .content { position: relative; z-index: 10; }
+
+        /* সব লেখার জন্য কমন ঝিকিমিকি এনিমেশন */
+        .rgb-text {
+            background: linear-gradient(90deg, #ff0000, #ff00cc, #3333ff, #00ff88, #ffcc00, #ff0000);
             background-size: 200% auto;
-            padding: 10px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            animation: moveShine 3s linear infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: moveShine 2s linear infinite;
+            font-weight: 900;
+            display: block;
+        }
+
+        /* RECEIVED OFF লেখাটি বড় */
+        .title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 204, 0.6));
+        }
+
+        /* মাঝখানের মেসেজগুলো */
+        .message {
+            font-size: 17px;
+            line-height: 1.4;
+            margin: 10px 0;
+            filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.5));
+        }
+
+        /* টেনশন করবেন না - এই পার্টটি একটু আলাদা কালার গ্লো দিবে */
+        .safe-text {
+            font-size: 19px;
+            margin: 15px 0;
+            color: #00ff88;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.8));
+        }
+
+        /* নিচের সতর্কবার্তা */
+        .warning {
+            font-size: 20px;
+            margin-top: 20px;
+            text-transform: uppercase;
+            filter: drop-shadow(0 0 12px rgba(255, 204, 0, 0.8));
         }
 
         @keyframes moveShine {
             to { background-position: 200% center; }
         }
 
-        .date-badge {
-            background: rgba(0, 210, 255, 0.1);
-            border: 1px solid #00d2ff;
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 12px;
-            color: #00d2ff;
-            margin-bottom: 10px;
-        }
-
-        .id-card {
-            background: #0d0d0d;
-            margin-bottom: 10px;
-            padding: 12px;
-            border-radius: 12px;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .id-card::before {
-            content: '';
-            position: absolute;
-            height: 300%; 
-            width: 300%;
-            background: conic-gradient(#ff00cc, #3333ff, #00ff88, #ffcc00, #ff00cc);
-            animation: rotateGlow 4s linear infinite;
-            left: -100%; top: -100%;
-        }
-
-        @keyframes rotateGlow {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .id-card::after {
-            content: '';
-            position: absolute;
-            background: #0d0d0d;
-            inset: 3px;
-            border-radius: 10px;
-            z-index: 1;
-        }
-
-        .card-info { position: relative; z-index: 2; flex: 1; text-align: left; }
-
-        .id-title { color: #ffcc00; font-weight: bold; font-size: 15px; margin: 0; }
-        .price { color: #00ff88; font-size: 14px; font-weight: bold; margin: 2px 0; }
-        
-        .details { font-size: 11px; color: #ccc; }
-        .uid { color: #00e5ff; font-weight: bold; }
-        .pass { color: #ff7675; font-weight: bold; }
-        .extra { color: #a29bfe; font-weight: bold; }
-
-        .last-time {
-            font-size: 10px;
-            color: #ff4d4d;
-            font-weight: 800;
-            display: block;
-            margin-top: 5px;
-        }
-
-        .btn-submit {
-            position: relative;
-            z-index: 2;
-            padding: 7px 12px;
-            background: #0088cc;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(0, 136, 204, 0.5);
-        }
-
-        /* ইনস্টাগ্রাম অফ নোটিশ স্টাইল */
-        .off-notice {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            text-align: center;
-            padding: 5px;
-            color: #ff4d4d;
-            font-weight: bold;
+        .footer-name {
+            margin-top: 30px;
             font-size: 13px;
-            text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
-            animation: blink 1.5s infinite;
-        }
-
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .trust-banner {
-            margin-top: 10px;
-            padding: 12px;
-            background: rgba(0, 255, 136, 0.08);
-            border: 2px dashed #00ff88;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
-        }
-
-        .trust-banner h3 {
-            margin: 0 0 5px 0;
-            color: #00ff88;
-            font-size: 16px;
-            text-transform: uppercase;
-        }
-
-        .trust-banner p {
-            margin: 0;
-            font-size: 12px;
-            line-height: 1.6;
-            color: #eee;
-        }
-
-        .file-note {
-            background: rgba(255, 204, 0, 0.1);
             color: #ffcc00;
-            padding: 5px;
-            font-size: 11px;
-            border-radius: 5px;
-            margin-top: 8px;
             font-weight: bold;
-            border: 1px solid rgba(255, 204, 0, 0.3);
-        }
-
-        .footer {
-            margin-top: 10px;
-            font-size: 11px;
-            color: #888;
-            font-weight: bold;
-            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
+            border-top: 1px solid #333;
+            padding-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <div>
-            <div class="welcome-msg">✨ DGD BUY SELL OFFICIAL ✨</div>
-            <div class="date-badge">📅 ১০/০৪/২০২৬ ইং</div>
-        </div>
+    <div class="notice-container">
+        <div class="content">
+            <span class="rgb-text title">RECEIVED OFF</span>
+            
+            <span class="rgb-text message">আজকের জন্য আইডি নেওয়া বন্ধ করা হয়েছে।</span>
+            <span class="rgb-text message">দয়া করে আজকে আর কেউ ফাইল দেবেন না।</span>
+            
+            <hr style="border: 0; border-top: 1px dashed #444; margin: 15px 0;">
 
-        <div class="list-section">
-            <div class="id-card">
-                <div class="card-info">
-                    <p class="id-title">PC CLONE 1000XXX</p>
-                    <p class="price">PRICE: 12TK</p>
-                    <p class="details">SHEET: <span class="uid">UID</span> + <span class="pass">PASS</span> + <span class="extra">COOKIES</span></p>
-                    <span class="last-time">LAST TIME 09:00PM</span>
-                </div>
-                <a href="https://t.me/nahid_bots" class="btn-submit" target="_blank">SUBMIT</a>
+            <span class="rgb-text safe-text">সবার আইডি রিসিভ করা হয়েছে,</span>
+            <span class="rgb-text message">কেউ কোনো টেনশন করবেন না। ইনশাআল্লাহ্ সব ঠিক আছে।</span>
+            
+            <span class="rgb-text warning">এখন আর রিসিভ হবে না!</span>
+            
+            <div class="footer-name">
+                DGD BUY SELL • Powered by ARAFAT
             </div>
-
-            <div class="id-card">
-                <div class="card-info">
-                    <p class="id-title">Number 0Friend 2fa</p>
-                    <p class="price">PRICE: 5TK</p>
-                    <p class="details">SHEET: <span class="uid">UID</span> + <span class="pass">PASS</span> + <span class="extra">2FA</span></p>
-                    <span class="last-time">LAST TIME 09:00PM</span>
-                </div>
-                <a href="https://t.me/as_file_submit" class="btn-submit" target="_blank">SUBMIT</a>
-            </div>
-
-            <div class="id-card">
-                <div class="off-notice">
-                    🚫 আজকের সমস্যার কারণে ইনস্টাগ্রাম আইডি নেওয়া হবে না।
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <div class="file-note">
-                ⚠️ নোট: ফাইল সাবমিট করার সময় অবশ্যই আইডির ধরন লিখে দিবেন।
-            </div>
-
-            <div class="trust-banner">
-                <h3>🛡️ 100% নিরাপদ লেনদেন</h3>
-                <p>আমাদের সাথে লেনদেনে কোন প্রকার স্ক্যাম বা প্রতারণার ভয় নেই। আমরা সততার সাথে দীর্ঘ সময় ধরে আপনাদের সেবা দিচ্ছি। ইনশাআল্লাহ্!</p>
-            </div>
-
-            <div class="footer">DGD BUY SELL • Powered by ARAFAT</div>
         </div>
     </div>
 

@@ -129,7 +129,26 @@
             box-shadow: 0 0 10px rgba(0, 136, 204, 0.5);
         }
 
-        /* বড় এবং সাজানো ট্রাস্ট ব্যানার */
+        /* ইনস্টাগ্রাম অফ নোটিশ স্টাইল */
+        .off-notice {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            text-align: center;
+            padding: 5px;
+            color: #ff4d4d;
+            font-weight: bold;
+            font-size: 13px;
+            text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
         .trust-banner {
             margin-top: 10px;
             padding: 12px;
@@ -204,13 +223,9 @@
             </div>
 
             <div class="id-card">
-                <div class="card-info">
-                    <p class="id-title">INSTAGRAM 2FA</p>
-                    <p class="price">PRICE: 2.8TK</p>
-                    <p class="details">SHEET: <span class="uid">USERNAME</span> + <span class="pass">PASS</span> + <span class="extra">2FA + MAIL</span></p>
-                    <span class="last-time">LAST TIME 07:30PM</span>
+                <div class="off-notice">
+                    🚫 আজকের সমস্যার কারণে ইনস্টাগ্রাম আইডি নেওয়া হবে না।
                 </div>
-                <a href="https://t.me/nahid_bots" class="btn-submit" target="_blank">SUBMIT</a>
             </div>
         </div>
 

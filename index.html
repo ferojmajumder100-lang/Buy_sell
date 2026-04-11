@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DGD BUY SELL - RGB Notice</title>
+    <title>Math Portal - DGD BUY SELL</title>
     <style>
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
         
         body {
             background-color: #000;
             color: white;
-            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding: 10px;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,93 +21,125 @@
         }
 
         /* প্রিমিয়াম ঝিকিমিকি বর্ডার কার্ড */
-        .notice-container {
+        .portal-container {
             width: 100%;
-            max-width: 360px;
-            padding: 35px 25px;
+            max-width: 380px;
+            padding: 40px 30px;
             background: #0d0d0d;
-            border-radius: 25px;
+            border-radius: 30px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 1);
+            box-shadow: 0 0 60px rgba(0, 0, 0, 1);
+            transition: transform 0.3s ease;
         }
 
-        /* রঙিন সাপের মতো ঘুরন্ত বর্ডার */
-        .notice-container::before {
+        .portal-container:hover { transform: translateY(-5px); }
+
+        /* সাপের মতো ঘুরন্ত রঙিন বর্ডার */
+        .portal-container::before {
             content: '';
             position: absolute;
             height: 400%; width: 400%;
-            background: conic-gradient(
-                #ff0000, #ff00cc, #3333ff, #00ff88, #ffcc00, #ff0000
-            );
+            background: conic-gradient(#ff0000, #ff00cc, #3333ff, #00ff88, #ffcc00, #ff0000);
             animation: rotateGlow 3s linear infinite;
             left: -150%; top: -150%;
             z-index: 1;
         }
 
-        .notice-container::after {
+        .portal-container::after {
             content: '';
             position: absolute;
             background: #0d0d0d;
-            inset: 4px;
-            border-radius: 22px;
+            inset: 5px;
+            border-radius: 26px;
             z-index: 2;
         }
 
-        @keyframes rotateGlow {
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes rotateGlow { 100% { transform: rotate(360deg); } }
 
-        .content { position: relative; z-index: 10; }
+        .content { position: relative; z-index: 10; display: flex; flex-direction: column; gap: 25px; }
 
-        /* সব লেখার জন্য কমন ঝিকিমিকি এনিমেশন */
+        /* সব লেখার জন্য RGB ঝিকিমিকি এনিমেশন */
         .rgb-text {
-            background: linear-gradient(90deg, #ff0000, #ff00cc, #3333ff, #00ff88, #ffcc00, #ff0000);
+            background: linear-gradient(90deg, #ff0000, #00d2ff, #ff00cc, #00ff88, #ffcc00, #ff0000);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: moveShine 2s linear infinite;
             font-weight: 900;
-            display: block;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
         }
 
-        /* RECEIVED OFF লেখাটি বড় */
-        .title {
-            font-size: 32px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(255, 0, 204, 0.6));
+        @keyframes moveShine { to { background-position: 200% center; } }
+
+        .main-title { font-size: 36px; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+        .sub-title { font-size: 18px; color: #ccc; font-weight: 500; margin: -10px 0 10px; }
+
+        /* প্রধান অ্যাকশন বাটন - ঝিকিমিকি */
+        .btn-action {
+            display: inline-block;
+            padding: 18px 30px;
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 204, 0.5);
+            transition: all 0.3s ease;
+            animation: pulse 1.5s infinite alternate;
         }
 
-        /* মাঝখানের মেসেজগুলো */
-        .message {
-            font-size: 17px;
-            line-height: 1.4;
-            margin: 10px 0;
-            filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.5));
+        .btn-action:hover { box-shadow: 0 0 30px rgba(51, 51, 255, 0.8); transform: scale(1.03); }
+
+        @keyframes pulse {
+            from { box-shadow: 0 0 20px rgba(255, 0, 204, 0.5); }
+            to { box-shadow: 0 0 35px rgba(51, 51, 255, 0.7); }
         }
 
-        /* টেনশন করবেন না - এই পার্টটি একটু আলাদা কালার গ্লো দিবে */
-        .safe-text {
-            font-size: 19px;
-            margin: 15px 0;
-            color: #00ff88;
-            filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.8));
+        /* পাসওয়ার্ড এরিয়া - প্রথমে লুকানো */
+        #passwordArea { display: none; flex-direction: column; gap: 15px; margin-top: 10px; animation: slideIn 0.5s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ইনপুট বক্স - প্রিমিয়াম লুক */
+        .input-pass {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #333;
+            border-radius: 15px;
+            color: #fff;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
         }
 
-        /* নিচের সতর্কবার্তা */
-        .warning {
+        .input-pass:focus { border-color: #00d2ff; box-shadow: 0 0 15px rgba(0, 210, 255, 0.4); }
+
+        /* GET বাটন - ঝিকিমিকি */
+        .btn-get {
+            width: 100%;
+            padding: 15px;
             font-size: 20px;
-            margin-top: 20px;
-            text-transform: uppercase;
-            filter: drop-shadow(0 0 12px rgba(255, 204, 0, 0.8));
+            font-weight: 800;
+            background: linear-gradient(45deg, #00ff88, #ffcc00);
+            border: none;
+            border-radius: 15px;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
         }
 
-        @keyframes moveShine {
-            to { background-position: 200% center; }
-        }
+        .btn-get:hover { box-shadow: 0 0 25px rgba(255, 204, 0, 0.7); transform: scale(1.02); }
 
-        .footer-name {
-            margin-top: 30px;
+        #errorMsg { color: #ff4d4d; font-size: 14px; margin-top: -10px; display: none; }
+
+        .footer {
+            margin-top: 35px;
             font-size: 13px;
             color: #ffcc00;
             font-weight: bold;
@@ -120,25 +151,53 @@
 </head>
 <body>
 
-    <div class="notice-container">
+    <div class="portal-container">
         <div class="content">
-            <span class="rgb-text title">RECEIVED OFF</span>
+            <span class="rgb-text main-title">UNLIMITED FACEBOOK CREATE</span>
+            <span class="sub-title">নিচের বাটনে চাপ দিয়ে প্রবেশ করুন।</span>
             
-            <span class="rgb-text message">আজকের জন্য আইডি নেওয়া বন্ধ করা হয়েছে।</span>
-            <span class="rgb-text message">দয়া করে আজকে আর কেউ ফাইল দেবেন না।</span>
+            <button class="btn-action" id="showPassBtn" onclick="showPasswordArea()">ম্যাথ দেখতে চাপ দিন</button>
             
-            <hr style="border: 0; border-top: 1px dashed #444; margin: 15px 0;">
-
-            <span class="rgb-text safe-text">সবার আইডি রিসিভ করা হয়েছে,</span>
-            <span class="rgb-text message">কেউ কোনো টেনশন করবেন না। ইনশাআল্লাহ্ সব ঠিক আছে।</span>
-            
-            <span class="rgb-text warning">এখন আর রিসিভ হবে না!</span>
-            
-            <div class="footer-name">
-                DGD BUY SELL • Powered by ARAFAT
+            <div id="passwordArea">
+                <span class="rgb-text" style="font-size: 18px;">পাসওয়ার্ড দিন:</span>
+                <input type="password" class="input-pass" id="passInput" placeholder="এখানে লিখুন...">
+                <p id="errorMsg">❌ ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
+                <button class="btn-get" onclick="checkPassword()">GET</button>
             </div>
+            
+            <div class="footer">DGD BUY SELL • Powered by ARAFAT</div>
         </div>
     </div>
 
+    <script>
+        function showPasswordArea() {
+            document.getElementById('showPassBtn').style.display = 'none';
+            document.getElementById('passwordArea').style.display = 'flex';
+            document.getElementById('passInput').focus(); // অটো ফোকাস
+        }
+
+        function checkPassword() {
+            const userInput = document.getElementById('passInput').value;
+            const correctPass = 'arafat1231';
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (userInput === correctPass) {
+                // সরাসরি ফেসবুক ওপেন হবে
+                window.location.href = 'https://www.mediafire.com/file/hqqnt2jo8iksq6o/Project+8+[6D650A1].mp4/file';
+            } else {
+                // ভুল পাসওয়ার্ড মেসেজ
+                errorMsg.style.display = 'block';
+                document.getElementById('passInput').value = ''; // বক্স খালি করা
+                document.getElementById('passInput').focus();
+            }
+        }
+
+        // এন্টার চাপ দিলেও যেন কাজ করে
+        document.getElementById('passInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
 </body>
-</html>
+</html

@@ -20,7 +20,6 @@
             overflow: hidden;
         }
 
-        /* প্রিমিয়াম ঝিকিমিকি বর্ডার কার্ড */
         .portal-container {
             width: 100%;
             max-width: 380px;
@@ -30,12 +29,8 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 0 60px rgba(0, 0, 0, 1);
-            transition: transform 0.3s ease;
         }
 
-        .portal-container:hover { transform: translateY(-5px); }
-
-        /* সাপের মতো ঘুরন্ত রঙিন বর্ডার */
         .portal-container::before {
             content: '';
             position: absolute;
@@ -59,7 +54,6 @@
 
         .content { position: relative; z-index: 10; display: flex; flex-direction: column; gap: 25px; }
 
-        /* সব লেখার জন্য RGB ঝিকিমিকি এনিমেশন */
         .rgb-text {
             background: linear-gradient(90deg, #ff0000, #00d2ff, #ff00cc, #00ff88, #ffcc00, #ff0000);
             background-size: 200% auto;
@@ -67,102 +61,63 @@
             -webkit-text-fill-color: transparent;
             animation: moveShine 2s linear infinite;
             font-weight: 900;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
         }
 
         @keyframes moveShine { to { background-position: 200% center; } }
 
-        .main-title { font-size: 36px; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
-        .sub-title { font-size: 18px; color: #ccc; font-weight: 500; margin: -10px 0 10px; }
+        .main-title { font-size: 30px; margin: 0; text-transform: uppercase; }
+        .sub-title { font-size: 16px; color: #ccc; margin: -10px 0 10px; }
 
-        /* প্রধান অ্যাকশন বাটন - ঝিকিমিকি */
-        .btn-action {
-            display: inline-block;
-            padding: 18px 30px;
-            font-size: 22px;
-            font-weight: 800;
-            color: #fff;
-            text-decoration: none;
-            background: linear-gradient(45deg, #ff00cc, #3333ff);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 204, 0.5);
-            transition: all 0.3s ease;
-            animation: pulse 1.5s infinite alternate;
-        }
-
-        .btn-action:hover { box-shadow: 0 0 30px rgba(51, 51, 255, 0.8); transform: scale(1.03); }
-
-        @keyframes pulse {
-            from { box-shadow: 0 0 20px rgba(255, 0, 204, 0.5); }
-            to { box-shadow: 0 0 35px rgba(51, 51, 255, 0.7); }
-        }
-
-        /* পাসওয়ার্ড এরিয়া - প্রথমে লুকানো */
-        #passwordArea { display: none; flex-direction: column; gap: 15px; margin-top: 10px; animation: slideIn 0.5s ease; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ইনপুট বক্স - প্রিমিয়াম লুক */
-        .input-pass {
-            width: 100%;
-            padding: 15px 20px;
-            font-size: 18px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid #333;
-            border-radius: 15px;
-            color: #fff;
-            text-align: center;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .input-pass:focus { border-color: #00d2ff; box-shadow: 0 0 15px rgba(0, 210, 255, 0.4); }
-
-        /* GET বাটন - ঝিকিমিকি */
-        .btn-get {
+        .btn-action, .btn-get, .btn-copy {
             width: 100%;
             padding: 15px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
-            background: linear-gradient(45deg, #00ff88, #ffcc00);
             border: none;
             border-radius: 15px;
-            color: #000;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+            transition: 0.3s;
         }
 
-        .btn-get:hover { box-shadow: 0 0 25px rgba(255, 204, 0, 0.7); transform: scale(1.02); }
+        .btn-action { background: linear-gradient(45deg, #ff00cc, #3333ff); color: white; }
+        .btn-get { background: linear-gradient(45deg, #00ff88, #ffcc00); color: black; }
+        .btn-copy { background: linear-gradient(45deg, #00d2ff, #3333ff); color: white; }
 
-        #errorMsg { color: #ff4d4d; font-size: 14px; margin-top: -10px; display: none; }
+        #passwordArea, #copyArea { display: none; flex-direction: column; gap: 15px; }
 
-        .footer {
-            margin-top: 35px;
-            font-size: 13px;
-            color: #ffcc00;
-            font-weight: bold;
-            text-shadow: 0 0 8px rgba(255, 204, 0, 0.6);
-            border-top: 1px solid #333;
-            padding-top: 20px;
+        .input-box {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #444;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
         }
+
+        #errorMsg { color: #ff4d4d; display: none; font-size: 14px; }
+        .footer { margin-top: 20px; font-size: 12px; color: #777; border-top: 1px solid #333; padding-top: 15px; }
     </style>
 </head>
 <body>
 
     <div class="portal-container">
         <div class="content">
-            <span class="rgb-text main-title">UNLIMITED FACEBOOK CREATE</span>
-            <span class="sub-title">নিচের বাটনে চাপ দিয়ে প্রবেশ করুন।</span>
+            <span class="rgb-text main-title">UNLIMITED FB CREATE</span>
+            <span class="sub-title">নিচের বাটনে চাপ দিন</span>
             
-            <button class="btn-action" id="showPassBtn" onclick="showPasswordArea()">ম্যাথ দেখতে চাপ দিন</button>
+            <button class="btn-action" id="showPassBtn" onclick="showPasswordArea()">প্রবেশ করুন</button>
             
             <div id="passwordArea">
-                <span class="rgb-text" style="font-size: 18px;">পাসওয়ার্ড দিন:</span>
-                <input type="password" class="input-pass" id="passInput" placeholder="এখানে লিখুন...">
-                <p id="errorMsg">❌ ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
-                <button class="btn-get" onclick="checkPassword()">GET</button>
+                <input type="password" class="input-box" id="passInput" placeholder="পাসওয়ার্ড দিন...">
+                <p id="errorMsg">❌ ভুল পাসওয়ার্ড!</p>
+                <button class="btn-get" onclick="checkPassword()">GET LINK</button>
+            </div>
+
+            <div id="copyArea">
+                <span class="rgb-text">লিঙ্কটি কপি করুন:</span>
+                <input type="text" class="input-box" id="linkToCopy" value="https://www.mediafire.com/file/hqqnt2jo8iksq6o/Project+8+[6D650A1].mp4/file" readonly>
+                <button class="btn-copy" id="copyBtn" onclick="copyText()">COPY LINK</button>
             </div>
             
             <div class="footer">DGD BUY SELL • Powered by ARAFAT</div>
@@ -173,31 +128,42 @@
         function showPasswordArea() {
             document.getElementById('showPassBtn').style.display = 'none';
             document.getElementById('passwordArea').style.display = 'flex';
-            document.getElementById('passInput').focus(); // অটো ফোকাস
         }
 
         function checkPassword() {
             const userInput = document.getElementById('passInput').value;
             const correctPass = 'arafat1231';
-            const errorMsg = document.getElementById('errorMsg');
-
             if (userInput === correctPass) {
-                // সরাসরি ফেসবুক ওপেন হবে
-                window.location.href = 'https://www.mediafire.com/file/hqqnt2jo8iksq6o/Project+8+[6D650A1].mp4/file';
+                document.getElementById('passwordArea').style.display = 'none';
+                document.getElementById('copyArea').style.display = 'flex';
             } else {
-                // ভুল পাসওয়ার্ড মেসেজ
-                errorMsg.style.display = 'block';
-                document.getElementById('passInput').value = ''; // বক্স খালি করা
-                document.getElementById('passInput').focus();
+                document.getElementById('errorMsg').style.display = 'block';
             }
         }
 
-        // এন্টার চাপ দিলেও যেন কাজ করে
-        document.getElementById('passInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                checkPassword();
+        function copyText() {
+            const copyInput = document.getElementById('linkToCopy');
+            const copyBtn = document.getElementById('copyBtn');
+
+            // সব ধরণের ফোনের জন্য কার্যকরী কপি পদ্ধতি
+            copyInput.select();
+            copyInput.setSelectionRange(0, 99999); // মোবাইল সাপোর্ট
+
+            try {
+                document.execCommand('copy');
+                copyBtn.innerText = 'COPIED! ✅';
+                copyBtn.style.background = 'linear-gradient(45deg, #00ff88, #009944)';
+            } catch (err) {
+                // বিকল্প পদ্ধতি যদি execCommand ব্যর্থ হয়
+                navigator.clipboard.writeText(copyInput.value);
+                copyBtn.innerText = 'COPIED! ✅';
             }
-        });
+
+            setTimeout(() => {
+                copyBtn.innerText = 'COPY LINK';
+                copyBtn.style.background = 'linear-gradient(45deg, #00d2ff, #3333ff)';
+            }, 2000);
+        }
     </script>
 </body>
-</html
+</html>
